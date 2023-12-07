@@ -1,0 +1,44 @@
+package com.rentmycam.ui;
+
+import java.util.Scanner;
+
+public class WelcomeScreen {
+    //Default UserName
+	private static final String DEFAULT_USERNAME = "ra12345";
+	private static final String DEFAULT_PASSWORD = "123456789";
+	
+	//Welcome Message Displayed On Screen
+	public static String login() {
+		Scanner scanner = new Scanner(System.in);
+		
+		System.out.println("+------------------------------------+");
+		System.out.println("|    WELCOME TO CAMERA RENTAL APP    |");
+		System.out.println("+------------------------------------+");
+		
+		System.out.println("Please Login To Continue");
+		//Enter Username
+		System.out.println("Username: ");
+		String username = scanner.nextLine();
+		//Enter Password
+		System.out.print("Enter your password: ");
+        String password = scanner.nextLine();
+		//If New User Ask To Create New Username
+		if(DEFAULT_USERNAME.equals(username)) {
+			System.out.println("Welcome back, " + DEFAULT_USERNAME + "!");
+		}else {
+			System.out.println("New user detected. Please create a new username. ");
+			System.out.print("Enter New Username: " );
+			String newUsername = scanner.nextLine();
+		    System.out.println("New Username Created: ");
+		    System.out.print("Enter your new password: ");
+            String newPassword = scanner.nextLine();
+            System.out.println("New password created for user: " + username);
+			return newUsername;			
+		}
+		return DEFAULT_USERNAME;
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+}

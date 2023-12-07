@@ -1,0 +1,10 @@
+package com.rentmycam.ui;
+
+public class WelcomeScreen {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,48 @@
+package com.rentmycam;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class User {
+
+	double walletBalance;
+	List<Camera> myCameras;
+	
+	
+	public User(double walletBalance) {
+		super();
+		this.walletBalance = walletBalance;
+		this.myCameras = new ArrayList<>();
+	}
+
+
+	public double getWalletBalance() {
+		return walletBalance;
+	}
+
+
+	public void setWalletBalance(double walletBalance) {
+		this.walletBalance = walletBalance;
+	}
+
+
+	public List<Camera> getMyCameras() {
+		return myCameras;
+	}
+
+
+	public void addCamera(Camera camera) {
+		myCameras.add(camera);
+	}
+
+	
+	public Camera removeCamera(int index) {
+		return myCameras.remove(index);
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

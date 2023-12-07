@@ -1,0 +1,156 @@
+package com.rentmycam.main;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import com.rentmycam.Camera;
+import com.rentmycam.User;
+import com.rentmycam.exceptions.InsufficientBalanceException;
+import com.rentmycam.operations.CameraOperations;
+import com.rentmycam.ui.WelcomeScreen;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		String username = WelcomeScreen.login();
+		
+		//Intialize User And Camera Data
+		User user = new User(100.0);
+		List<Camera> cameraList = new ArrayList<>();
+		cameraList.add(new Camera("Canon", "EOS R5", 25.0));
+		cameraList.add(new Camera("Sony", "A7 III", 20.0));
+		
+		//Display Welcome Message
+		System.out.println("Welcome, " + username + "!");
+		
+		//Handle User Interactions
+		Scanner scanner = new Scanner(System.in);
+		int choice;
+		do {
+			System.out.println("\nMenu:");
+			System.out.println("1. List Cameras");
+			System.out.println("2. Rent a Camera");
+			System.out.println("3. View Wallet Balance");
+			System.out.println("4. Deposit Money");
+			System.out.println("5. My Cameras");
+			System.out.println("6. Navigate to Main Context");
+			System.out.println("7. Close Application");
+			
+			choice = scanner.nextInt();
+			scanner.nextLine(); // Consume The New Line Character
+			
+			switch (choice) {
+			case 1:
+				CameraOperations.listCameras(cameraList);
+				break;
+			case 2:
+				System.out.println("Enter the index of the camera to rent: ");
+				int cameraIndex = scanner.nextInt();
+				try {
+					Camera cameraToRent = cameraList.get(cameraIndex);
+					CameraOperations.rentCamera(user,  cameraToRent);
+				}catch (IndexOutOfBoundsException e) {
+					System.out.println("Invalid camera Index. Please Try Again.");
+				}catch(InsufficientBalanceException e) {
+					System.out.println(e.getMessage());
+				}
+				break;
+			case 3:
+				CameraOperations.viewWallet(user);
+				System.out.println("If you want to Deposit More Money, Please Click 4 And Deposit Your Money");
+				break;
+			case 4: 
+				System.out.println("Enter the amount to deposit: INR");
+				double depositAmount = scanner.nextDouble();
+				CameraOperations.depositAmount(user,  depositAmount);
+				break;
+			case 5:
+				handleMyCamerasSubMenu(scanner, user);
+				break;
+			case 6:
+				//Add Logic To Navigate To The Main Context
+				break;
+			case 7: 
+				System.out.println("Closing the Application. Have A Nice Day");
+				break;
+			default:
+				System.out.println("Invalid choice. Please enter a valid option. ");
+			}
+		}while(choice != 7);
+	}
+
+	private static void handleMyCamerasSubMenu(Scanner scanner, User user) {
+        int myCamerasChoice;
+        do {
+            System.out.println("\nMy Cameras:");
+            System.out.println("1. Add Camera");
+            System.out.println("2. Remove Camera");
+            System.out.println("3. View My Cameras");
+            System.out.println("4. Go To Previous Menu");
+            System.out.print("Enter your choice: ");
+
+            myCamerasChoice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            switch (myCamerasChoice) {
+                case 1:
+                    handleAddCamera(scanner, user);
+                    break;
+                case 2:
+                    handleRemoveCamera(scanner, user);
+                    break;
+                case 3:
+                    CameraOperations.listCameras(user.getMyCameras());
+                    break;
+                case 4:
+                    System.out.println("Returning to the main menu.");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter a valid option.");
+            }
+        } while (myCamerasChoice != 4);
+	}
+	private static void handleAddCamera(Scanner scanner, User user) {
+	    scanner.nextLine(); // Consume the newline character from the previous input
+
+	    System.out.print("Enter camera brand: ");
+	    String brand = scanner.nextLine();
+	    System.out.print("Enter camera model: ");
+	    String model = scanner.nextLine();  // Read the camera model as a string
+
+	    System.out.print("Enter per-day rent amount: INR");
+	    double perDayRent = scanner.nextDouble();
+
+	    Camera newCamera = new Camera(brand, model, perDayRent);
+	    user.addCamera(newCamera);
+
+	    System.out.println("New camera added successfully: " + brand + " " + model);
+	}
+    private static void handleRemoveCamera(Scanner scanner, User user) {
+        if (user.getMyCameras().isEmpty()) {
+            System.out.println("No cameras to remove. Your camera collection is empty.");
+        } else {
+            CameraOperations.listCameras(user.getMyCameras());
+            System.out.print("Enter the Camera ID to remove: ");
+            int cameraIdToRemove = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            boolean removed = false;
+            for (Camera camera : user.getMyCameras()) {
+                if (camera.getCameraId() == cameraIdToRemove) {
+                    user.removeCamera(camera);
+                    System.out.println("Camera removed successfully: " + camera.getBrand() + " " + camera.getModel());
+                    removed = true;
+                    break;
+                }
+            }
+
+            if (!removed) {
+                System.out.println("Camera not found. Please enter a valid Camera ID.");
+            }
+        }
+    }
+}

@@ -1,0 +1,32 @@
+package com.rentmycam.ui;
+
+import java.util.Scanner;
+
+public class WelcomeScreen {
+    //Default UserName
+	private static final String DEFAULT_USERNAME = "ra12345";
+	//Welcome Message Displayed On Screen
+	public static String login() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Welcome to rentmycam.io");
+		System.out.println("Please Login To Continue");
+		//Enter Username
+		System.out.println("Username: ");
+		String username = scanner.nextLine();
+		//If New User Ask To Create New Username
+		if(DEFAULT_USERNAME.equals(username)) {
+			System.out.println("Welcome back, " + DEFAULT_USERNAME + "!");
+		}else {
+			System.out.println("New user detected. Please create a new username. ");
+			System.out.print("Enter New Username: " );
+			String newUsername = scanner.nextLine();
+		    System.out.println("New Username Created: ");
+			return newUsername;			
+		}
+		return DEFAULT_USERNAME;
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+}
