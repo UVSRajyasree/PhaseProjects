@@ -1,0 +1,29 @@
+<div class="col-md-5">
+    <div *ngIf="f1">
+    <h3>Details of {{employee.first_name}}</h3>
+    <p>Employee Id is {{employee.id}}</p>
+    <p>Employee First Name is {{employee.first_name}}</p>
+    <p>Employee Last Name is {{employee.last_name}}</p>
+    <p>Employee EmailId {{employee.email}}</p>
+    <input type="button" value="Employee List" (click)="displayAllEmployeeList()" class="btn btn-primary mr-2"/>
+    <input type="button" value="Delete" (click)="deleteEmployee(employee.id)" class="btn btn-warning mr-2"/>
+    <input type="button" value="Update " (click)="updateEmployee(employee)" class="btn btn-secondary"/>
+    </div>
+
+    <div *ngIf="f2">
+        <h2>Update Employee</h2>
+        <form [formGroup]="employeeRef" (ngSubmit)="updateEmployee(employee)">
+            <label>Id</label>
+            <input type="number" formControlName="id" class="form-control"/><br/>
+            <label>FirstName</label>
+            <input type="text" formControlName="first_name" class="form-control" /><br/>
+            <label>LastName</label>
+            <input type="text" formControlName="last_name" class="form-control"/><br/>
+            <label>Email</label>
+            <input type="text" formControlName="email" class="form-control"/><br/>
+            <input type="submit" [value]="submitButton" class="btn btn-success"/>
+            <input type="reset" value="Reset" class="btn btn-primary"/>
+        </form>
+        <span style="color:blue">{{msg}}</span>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="col-md-5">
+    <h2>Add Employee</h2>
+    <form [formGroup]="employeeRef" (ngSubmit)="storeEmployee()">
+        <label>Id</label>
+        <input type="number" formControlName="id" class="form-control"/><br/>
+        <label>FirstName</label>
+        <input type="text" formControlName="first_name" class="form-control" /><br/>
+        <label>LastName</label>
+        <input type="text" formControlName="last_name" class="form-control"/><br/>
+        <label>Email</label>
+        <input type="text" formControlName="email" class="form-control"/><br/>
+        <input type="submit" [value]="submitButton" class="btn btn-success"/>
+        <input type="reset" value="Reset" class="btn btn-primary"/>
+    </form>
+    <span style="color:blue">{{msg}}</span>
+    
+    <h2>All Employees</h2>
+    <div *ngFor="let employee of employees">
+    <p>Employee Id is {{employee.id}}</p>
+    <p>Employee First Name is {{employee.first_name}}</p>
+    <p>Employee Last Name is {{employee.last_name}}</p>
+    <p>Employee EmailId {{employee.email}}</p>
+    </div>
+</div>

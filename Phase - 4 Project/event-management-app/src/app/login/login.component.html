@@ -1,0 +1,26 @@
+<div class="col-md-2">
+    <h2>Login Page</h2>
+    <form [formGroup]="loginRef" (ngSubmit)="signIn()">
+        <label>EmailId</label>
+        <input type="email" formControlName="emailid" class="form-control" /><br/>
+        <label>Password</label>
+        <input type="password" formControlName="password" class="form-control" /><br/>
+        <input type="submit" value="SignIn"/>
+        <input type="submit" value="reset"/>
+    </form>
+    <br/>
+    <span style="color: blue">{{msg}}</span>
+
+    <div>
+        <h2>Update Password</h2>
+        <form [formGroup]="loginRef" (ngSubmit)="updatePassword(login)">
+            <label>EmailId</label>
+            <input type="text" formControlName="emaildid" class="form-control"/><br/>
+            <label>Password</label>
+            <input type="text" formControlName="password" class="form-control" /><br/>
+            <input type="submit" [value]="submitButton"/>
+            <input type="reset" value="Reset"/>
+        </form>
+        <span style="color:blue">{{msg}}</span>
+    </div>
+    </div>
