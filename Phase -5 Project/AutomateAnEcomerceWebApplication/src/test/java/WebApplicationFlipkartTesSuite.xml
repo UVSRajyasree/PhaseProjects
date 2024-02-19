@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite parallel="false" name="Suite">
+  <test name="Test">
+    <classes>
+      <class name="com.WebApplicationFlipkartTesting"/>
+    </classes>
+  </test> 
+   <test name="Test1">
+    <classes>
+      <class name="com.SearchAndImageLoadFlipkartTesting"/>
+    </classes>
+  </test>
+  <test name="Test2">
+    <classes>
+      <class name="com.ScrollAndFrequencyFlipkartTesting"/>
+    </classes>
+  </test>
+    <test name="Test3">
+    <classes>
+      <class name="com.ScrollPageFlipkartTesting"/>
+    </classes>
+  </test>
+  <!-- Test -->
+</suite> <!-- Suite -->
